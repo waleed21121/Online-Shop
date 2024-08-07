@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 app.get('/', (req, res, next) => {
-    res.send('hello');
+    res.render('index.ejs');
 })
 
 const PORT = process.env.PORT;
