@@ -12,5 +12,18 @@ const productSchema = new mongoose.Schema({
 });
 
 // model for the products
-const product = mongoose.model('product', productSchema);
+const Product = mongoose.model('product', productSchema);
 
+// Get all products from database
+exports.getAllProducts = async() => {
+
+    // Connect to DB
+    await mongoose.connect(DB_URL);
+
+    let products = await Product.find({});
+
+    // Disconnect from DB
+    await mongoose.disconnect();
+
+    return products;
+}
