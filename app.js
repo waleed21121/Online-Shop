@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config({path : 'config.env'});
 
 const homeRouter = require('./routes/home.route');
+const productRouter = require('./routes/product.route');
 
 const app = express();
 
@@ -15,6 +16,10 @@ app.set('views', 'views');
 
 // Home page details
 app.get('/', homeRouter);
+
+// Product page details
+app.get('/product', productRouter);
+
 
 const PORT = process.env.PORT;
 app.listen(PORT, (err) => {
