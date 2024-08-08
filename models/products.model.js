@@ -27,3 +27,14 @@ exports.getAllProducts = async() => {
 
     return products;
 }
+
+exports.getProductsByCategories = async(category) => {
+
+    await mongoose.connect(DB_URL);
+
+    let products = await Product.find({category: category});
+
+    await mongoose.disconnect();
+
+    return products;
+}
