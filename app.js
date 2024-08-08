@@ -18,8 +18,7 @@ app.set('views', 'views');
 app.get('/', homeRouter);
 
 // Product page details
-app.get('/product', productRouter);
-
+app.use('/product', productRouter);
 
 const PORT = process.env.PORT;
 app.listen(PORT, (err) => {
