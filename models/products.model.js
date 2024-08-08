@@ -38,3 +38,14 @@ exports.getProductsByCategories = async(category) => {
 
     return products;
 }
+
+exports.getProductById = async(id) => {
+
+    await mongoose.connect(DB_URL);
+
+    let product = await Product.findById(id);
+
+    await mongoose.disconnect();
+
+    return product;
+}
