@@ -18,9 +18,9 @@ exports.createNewUser = async (username, email, password) => {
     await mongoose.connect(DB_URL);
 
     // Check if email exists
-    let users = User.find({email : email});
+    let users = await User.find({email : email});
     let hashPassword;
-    if(!users) {
+    if(users.length === 0) {
         hashPassword = await bcrypt.hash(password, 10);
     }
     else {
@@ -28,7 +28,7 @@ exports.createNewUser = async (username, email, password) => {
         // Disconnect from DB
         await mongoose.disconnect();
 
-        throw new Error('This Email already have an account');
+        return Promise.reject('This Email already have an account');
     }
 
     // User with ecrypted password
@@ -38,9 +38,10 @@ exports.createNewUser = async (username, email, password) => {
         password: hashPassword
     });
 
+    // Create new user 
+    await newUser.save();
+    
     // Disconnect from DB
     await mongoose.disconnect();
 
-    // Create new user 
-    newUser.save();
 }

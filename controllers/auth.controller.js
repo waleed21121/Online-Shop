@@ -5,10 +5,14 @@ exports.getSignup = (req, res, next) => {
 }
 
 exports.postSignup = async (req, res, next) => {
-    await authModel.createNewUser(req.body.username, req.body.email, req.body.password).catch(err => res.redirect('/signup'));
-    res.redirect('/login');
+    try {
+        await authModel.createNewUser(req.body.username, req.body.email, req.body.password);
+        res.redirect('/login');
+    } catch (err) {
+        res.redirect('/signup');
+    }
 }
 
-exports.getlLogin = () => {
-    res.render('/login');
+exports.getlLogin = (req, res, next) => {
+    res.render('login');
 }

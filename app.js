@@ -18,11 +18,11 @@ app.set('views', 'views');
 // Home page details
 app.get('/', homeRouter);
 
-// sign up page details
-app.use('/', authRouter);
-
 // Product page details
 app.use('/product', productRouter);
+
+// sign up page details
+app.use('/', authRouter);
 
 const PORT = process.env.PORT;
 app.listen(PORT, (err) => {
