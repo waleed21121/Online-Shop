@@ -7,4 +7,5 @@ router.get('/signup', authController.getSignup);
 router.post('/signup', bodyParser.urlencoded({extended: true}), authController.postSignup);
 router.get('/login', authController.getlLogin);
 router.post('/login', bodyParser.urlencoded({ extended: true }), authController.postLogin);
+router.all('/logout', authController.logout);
 module.exports = router;
