@@ -16,3 +16,13 @@ exports.postSignup = async (req, res, next) => {
 exports.getlLogin = (req, res, next) => {
     res.render('login');
 }
+
+exports.postLogin = async (req, res, next) => {
+    try {
+        let id = await authModel.login(req.body.email, req.body.password);
+        req.session.userId = id;
+        res.redirect('/');
+    } catch (err) {
+        res.redirect('/login');
+    }
+}
