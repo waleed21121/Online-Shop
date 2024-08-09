@@ -18,10 +18,16 @@ app.use(express.static(path.join(__dirname, 'images')));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-const store = new SessionStore({
+const STORE = new SessionStore({
     uri: 'mongodb://127.0.0.1:27017/online-shop',
     collection: 'sessions'
 });
+
+app.use(session({
+    secret: 'waleed seif sherbiny Eyad eYAD SaleH .......',
+    saveUninitialized: false,
+    store: STORE
+}));
 
 // Home page details
 app.get('/', homeRouter);
