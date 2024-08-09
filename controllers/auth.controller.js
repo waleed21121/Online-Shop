@@ -26,3 +26,9 @@ exports.postLogin = async (req, res, next) => {
         res.redirect('/login');
     }
 }
+
+exports.logout = async (req, res, next) => {
+    req.session.destroy(() => {
+        res.redirect('/');
+    })
+}
