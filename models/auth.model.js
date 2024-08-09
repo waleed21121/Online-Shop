@@ -55,8 +55,10 @@ exports.login = async (email, password) => {
     let user = await User.findOne({email : email});
     let userExist;
 
+    //Disconnect fron DB
+    await mongoose.disconnect();
+
     if(!user) {
-        await mongoose.disconnect();
         return Promise.reject('There is no user matches this email');
     }
     else {
@@ -64,14 +66,8 @@ exports.login = async (email, password) => {
     }
 
     if(!userExist) {
-        await mongoose.disconnect();
         return Promise.reject('The password is incorrect');
     } else  {
-        // Set session
-        
-    }
-
-    // Disconnect from DB
-    await mongoose.disconnect();
-
+        return user._id;
+    }    
 }
