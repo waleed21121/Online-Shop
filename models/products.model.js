@@ -49,3 +49,14 @@ exports.getProductById = async(id) => {
 
     return product;
 }
+
+exports.getFirstProduct = async() => {
+
+    await mongoose.connect(DB_URL);
+
+    let product = await Product.findOne({});
+
+    await mongoose.disconnect();
+
+    return product;
+}
