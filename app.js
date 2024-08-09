@@ -6,6 +6,7 @@ dotenv.config({path : 'config.env'});
 
 const homeRouter = require('./routes/home.route');
 const productRouter = require('./routes/product.route');
+const authRouter = require('./routes/auth.route');
 
 const app = express();
 
@@ -16,6 +17,9 @@ app.set('views', 'views');
 
 // Home page details
 app.get('/', homeRouter);
+
+// sign up page details
+app.use('/', authRouter);
 
 // Product page details
 app.use('/product', productRouter);
