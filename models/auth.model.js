@@ -45,3 +45,33 @@ exports.createNewUser = async (username, email, password) => {
     await mongoose.disconnect();
 
 }
+
+exports.login = async (email, password) => {
+
+    // Connect to DB
+    await mongoose.connect(DB_URL);
+
+    // Check if email exists
+    let user = await User.findOne({email : email});
+    let userExist;
+
+    if(!user) {
+        await mongoose.disconnect();
+        return Promise.reject('There is no user matches this email');
+    }
+    else {
+        userExist = bcrypt.compare(password, user.password);
+    }
+
+    if(!userExist) {
+        await mongoose.disconnect();
+        return Promise.reject('The password is incorrect');
+    } else  {
+        // Set session
+        
+    }
+
+    // Disconnect from DB
+    await mongoose.disconnect();
+
+}

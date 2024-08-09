@@ -4,6 +4,9 @@ const dotenv = require('dotenv');
 
 dotenv.config({path : 'config.env'});
 
+const session = require('express-session');
+const SessionStore = require('connect-mongodb-session')(session); //constructor
+
 const homeRouter = require('./routes/home.route');
 const productRouter = require('./routes/product.route');
 const authRouter = require('./routes/auth.route');
@@ -14,6 +17,11 @@ app.use(express.static(path.join(__dirname, 'assets')));
 app.use(express.static(path.join(__dirname, 'images')));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
+const store = new SessionStore({
+    uri: 'mongodb://127.0.0.1:27017/online-shop',
+    collection: 'sessions'
+});
 
 // Home page details
 app.get('/', homeRouter);
