@@ -5,3 +5,8 @@ exports.getProduct = async (req, res, next) => {
     let product = await productModel.getProductById(id);
     res.render('product', {product: product});
 }
+
+exports.getFirstproduct = async (req, res, next) => {
+    let product = await productModel.getFirstProduct();
+    res.render('product', {product : product});
+}
