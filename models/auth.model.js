@@ -62,7 +62,7 @@ exports.login = async (email, password) => {
         return Promise.reject('There is no user matches this email');
     }
     else {
-        userExist = bcrypt.compare(password, user.password);
+        userExist = await bcrypt.compare(password, user.password);
     }
 
     if(!userExist) {
