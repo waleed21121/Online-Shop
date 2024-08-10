@@ -22,8 +22,7 @@ exports.postSignup = async (req, res, next) => {
             param: err.path,
             msg: err.msg
         }));
-        console.log(validationErrors);
-        console.log(errorsArray);
+
         req.flash('validationErrors', errorsArray);
         res.redirect('/signup');
     }
