@@ -17,7 +17,6 @@ exports.postSignup = async (req, res, next) => {
             res.redirect('/signup');
         }
     } else {
-
         const errorsArray = validationErrors.array().map(err => ({
             param: err.path,
             msg: err.msg
@@ -33,12 +32,22 @@ exports.getlLogin = (req, res, next) => {
 }
 
 exports.postLogin = async (req, res, next) => {
-    try {
-        let id = await authModel.login(req.body.email, req.body.password);
-        req.session.userId = id;
-        res.redirect('/');
-    } catch (err) {
-        req.flash('authError', err); // flash('key', val) => array
+    const validationErrors = validationResult(req);
+    if(validationErrors.isEmpty()) {
+        try {
+            let id = await authModel.login(req.body.email, req.body.password);
+            req.session.userId = id;
+            res.redirect('/');
+        } catch (err) {
+            req.flash('authError', err); // flash('key', val) => array
+            res.redirect('/login');
+        }
+    } else {
+        const errorsArray = validationErrors.array().map(err => ({
+            param: err.path,
+            msg: err.msg
+        }));
+        req.flash('validationErrors', errorsArray);
         res.redirect('/login');
     }
 }
