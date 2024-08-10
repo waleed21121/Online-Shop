@@ -1,14 +1,30 @@
 const authModel = require('../models/auth.model');
+const validationResult = require ('express-validator').validationResult;
 
 exports.getSignup = (req, res, next) => {
-    res.render('signup');
+    res.render('signup', {authError: req.flash("authError")[0],
+        validationErrors: req.flash("validationErrors")});
 }
 
 exports.postSignup = async (req, res, next) => {
-    try {
-        await authModel.createNewUser(req.body.username, req.body.email, req.body.password);
-        res.redirect('/login');
-    } catch (err) {
+    const validationErrors = validationResult(req);
+    if(validationErrors.isEmpty()) {
+        try {
+            await authModel.createNewUser(req.body.username, req.body.email, req.body.password);
+            res.redirect('/login');
+        } catch (err) {
+            req.flash('authError', err);
+            res.redirect('/signup');
+        }
+    } else {
+
+        const errorsArray = validationErrors.array().map(err => ({
+            param: err.path,
+            msg: err.msg
+        }));
+        console.log(validationErrors);
+        console.log(errorsArray);
+        req.flash('validationErrors', errorsArray);
         res.redirect('/signup');
     }
 }
