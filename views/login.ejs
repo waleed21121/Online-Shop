@@ -8,6 +8,12 @@
         <input type="password" class="form-control" name="password" placeholder="Password">
         <input type="submit" value="Login" class="btn btn-primary">
     </form>
+    <% if(authError) { %>
+        <br>
+        <p class="alert alert-danger">
+            <%= authError%>
+        </p>
+    <% } %>
     <br>
     <div>
         Don't have account ? <a href="/signup">Create Account</a>

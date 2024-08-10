@@ -14,7 +14,7 @@ exports.postSignup = async (req, res, next) => {
 }
 
 exports.getlLogin = (req, res, next) => {
-    res.render('login');
+    res.render('login', {authError: req.flash('authError')[0]});
 }
 
 exports.postLogin = async (req, res, next) => {
@@ -23,6 +23,7 @@ exports.postLogin = async (req, res, next) => {
         req.session.userId = id;
         res.redirect('/');
     } catch (err) {
+        req.flash('authError', err); // flash('key', val) => array
         res.redirect('/login');
     }
 }

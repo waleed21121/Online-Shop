@@ -6,6 +6,7 @@ dotenv.config({path : 'config.env'});
 
 const session = require('express-session');
 const SessionStore = require('connect-mongodb-session')(session); //constructor
+const flash = require('connect-flash');
 
 const homeRouter = require('./routes/home.route');
 const productRouter = require('./routes/product.route');
@@ -15,6 +16,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'assets')));
 app.use(express.static(path.join(__dirname, 'images')));
+app.use(flash());
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
