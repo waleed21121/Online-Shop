@@ -1,0 +1,24 @@
+const validationResult = require('express-validator').validationResult;
+const cartModel = require('../models/cart.model');
+
+exports.postCart = async (req, res, next) => {
+    const validationErrors = validationResult(req);
+    if(validationErrors.isEmpty) {
+        await cartModel.addNewItem({
+            name: req.body.name,
+            price: req.body.price,
+            amount: req.body.amount,
+            userId: req.session.userId,
+            productId: req.body.productId,
+            timestamp: Date.now()
+        });
+        res.redirect('/cart');
+    } else {
+        const errorsArray = validationErrors.array().map(err => ({
+            param: err.path,
+            msg: err.msg
+        }));
+        req.flash('validationErrors', errorsArray);
+        res.redirect(req.body.redirectTo);
+    }
+}
