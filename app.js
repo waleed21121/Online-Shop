@@ -11,6 +11,7 @@ const flash = require('connect-flash');
 const homeRouter = require('./routes/home.route');
 const productRouter = require('./routes/product.route');
 const authRouter = require('./routes/auth.route');
+const cartRouter = require('./routes/cart.route');
 
 const app = express();
 
@@ -37,7 +38,10 @@ app.get('/', homeRouter);
 // Product page details
 app.use('/product', productRouter);
 
-// sign up page details
+// Cart page details
+app.use('/cart', cartRouter);
+
+// Cign up page details
 app.use('/', authRouter);
 
 const PORT = process.env.PORT;
