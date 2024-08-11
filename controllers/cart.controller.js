@@ -3,7 +3,7 @@ const cartModel = require('../models/cart.model');
 
 exports.postCart = async (req, res, next) => {
     const validationErrors = validationResult(req);
-    if(validationErrors.isEmpty) {
+    if(validationErrors.isEmpty()) {
         await cartModel.addNewItem({
             name: req.body.name,
             price: req.body.price,
