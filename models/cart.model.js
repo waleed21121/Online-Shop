@@ -15,8 +15,15 @@ const CartItem = mongoose.model('cart', cartSchema);
 
 exports.addNewItem = async (data) => {
     await mongoose.connect(DB_URL);
-    let item = new CartItem(data);
+    const sameItem = await CartItem.findOne({productId: data.productId, userId: data.userId});
+    console.log(sameItem);
+    if(sameItem) {
+        const amount = +data.amount + sameItem.amount;
+        data.amount = amount;
+        await CartItem.deleteOne({_id: sameItem._id});
+    }
     try {
+        const item = new CartItem(data);
         await item.save();
     } catch (err) {
         mongoose.disconnect();
