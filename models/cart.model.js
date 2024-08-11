@@ -50,7 +50,7 @@ exports.editItem = async (id, newData) => {
 exports.deleteItem = async (id) => {
     await mongoose.connect(DB_URL);
     try {
-        await await CartItem.deleteOne({ _id: itemId });
+        await CartItem.deleteOne({ _id: id });
         mongoose.disconnect();
     } catch (err) {
         mongoose.disconnect();

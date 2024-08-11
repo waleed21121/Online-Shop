@@ -48,4 +48,5 @@ exports.updateAmount = async (req, res, next) => {
 
 exports.deleteProductFromCart = async (req, res, next) => {
     await cartModel.deleteItem(req.body.cartId);
+    res.redirect('/cart');
 }
