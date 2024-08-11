@@ -11,5 +11,15 @@ const cartSchema = mongoose.Schema({
     timestamp: Number
 });
 
-const cartItem = mongoose.model('cart', cartSchema);
+const CartItem = mongoose.model('cart', cartSchema);
 
+exports.addNewItem = async (data) => {
+    await mongoose.connect(DB_URL);
+    let item = new CartItem(data);
+    try {
+        await item.save();
+    } catch (err) {
+        mongoose.disconnect();
+        return Promise.reject(err);
+    }
+}
