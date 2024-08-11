@@ -12,5 +12,5 @@ exports.getHome = async(req, res, next) => {
         products = await productsModel.getProductsByCategories(category);
     else
         products = await productsModel.getAllProducts();
-    res.render('index', {products: products, isUser: req.session.userId});
+    res.render('index', {products: products, isUser: req.session.userId, validationErrors: req.flash('validationErrors')[0]});
 }
