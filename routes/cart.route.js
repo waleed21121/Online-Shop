@@ -12,4 +12,6 @@ router.post('/', authGard.isAuth, cartValidator.checkAmount, cartController.post
 
 router.post('/save', authGard.isAuth, cartValidator.checkAmount, cartController.updateAmount);
 
+router.post('/delete', authGard.isAuth, cartController.deleteProductFromCart);
+
 module.exports = router;
