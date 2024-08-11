@@ -25,5 +25,5 @@ exports.postCart = async (req, res, next) => {
 
 exports.getCart = async (req, res, next) => {
     const userItems = await cartModel.getItemById(req.session.userId);
-    res.render('cart', {items: userItems});
+    res.render('cart', {items: userItems, isUser: true});
 }
