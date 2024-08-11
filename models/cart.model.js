@@ -16,7 +16,6 @@ const CartItem = mongoose.model('cart', cartSchema);
 exports.addNewItem = async (data) => {
     await mongoose.connect(DB_URL);
     const sameItem = await CartItem.findOne({productId: data.productId, userId: data.userId});
-    console.log(sameItem);
     if(sameItem) {
         const amount = +data.amount + sameItem.amount;
         data.amount = amount;
@@ -58,6 +57,17 @@ exports.deleteItem = async (id) => {
     await mongoose.connect(DB_URL);
     try {
         await CartItem.deleteOne({ _id: id });
+        mongoose.disconnect();
+    } catch (err) {
+        mongoose.disconnect();
+        return Promise.reject(err);
+    }
+};
+
+exports.deleteAllCartItems = async (id) => {
+    await mongoose.connect(DB_URL);
+    try {
+        await CartItem.deleteMany({ userId: id});
         mongoose.disconnect();
     } catch (err) {
         mongoose.disconnect();
