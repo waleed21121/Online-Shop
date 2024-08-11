@@ -27,3 +27,21 @@ exports.getCart = async (req, res, next) => {
     const userItems = await cartModel.getItemByUserId(req.session.userId);
     res.render('cart', {items: userItems, isUser: true});
 }
+
+exports.updateAmount = async (req, res, next) => {
+    const validationErrors = validationResult(req);
+    if(validationErrors.isEmpty()) {
+        await cartModel.editItem({
+            amount: req.body.amount,
+            timestamp: Date.now()
+        });
+        res.redirect('/cart');
+    } else {
+        const errorsArray = validationErrors.array().map(err => ({
+            param: err.path,
+            msg: err.msg
+        }));
+        req.flash('validationErrors', errorsArray);
+        res.redirect('/cart');
+    }
+}
