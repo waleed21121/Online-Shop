@@ -24,10 +24,10 @@ exports.addNewItem = async (data) => {
     }
 }
 
-exports.getItemById = async (id) => {
+exports.getItemByUserId = async (id) => {
     await mongoose.connect(DB_URL);
     try {
-        const userItems = await CartItem.find({userId: id});
+        const userItems = await CartItem.find({userId: id}).sort({timestamp: -1});
         mongoose.disconnect();
         return userItems;
     } catch (err) {
