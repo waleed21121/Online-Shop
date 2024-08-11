@@ -36,6 +36,9 @@
                             </h5>
                             <form action="/cart" method="post">
                                 <input type="number" name="amount" class="form-control">
+                                <input type="hidden" name="name" class="form-control" value="<%= product.name%>">
+                                <input type="hidden" name="price" class="form-control" value="<%= product.price>">
+                                <input type="hidden" name="productId" class="form-control" value="<%= product._id%>">
                                 <input type="submit" value="Add To Cart" class="btn btn-primary">
                             </form>
                         </div>
