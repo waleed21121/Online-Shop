@@ -35,3 +35,15 @@ exports.getItemByUserId = async (id) => {
         return Promise.reject(err);
     }
 }
+
+exports.editItem = async (id, newData) => {
+    await mongoose.connect(DB_URL);
+    try {
+        const items = CartItem.updateOne({ _id: id }, newData);
+        mongoose.disconnect();
+        return items;
+    } catch (err) {
+        mongoose.disconnect();
+        return Promise.reject(err);
+    }
+};
