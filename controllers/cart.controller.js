@@ -50,3 +50,8 @@ exports.deleteProductFromCart = async (req, res, next) => {
     await cartModel.deleteItem(req.body.cartId);
     res.redirect('/cart');
 }
+
+exports.deleteAllProductsFromCart = async (req, res, next) => {
+    await cartModel.deleteAllCartItems(req.session.userId);
+    res.redirect('/');
+}
