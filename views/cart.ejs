@@ -42,8 +42,14 @@
                 <% } %>
             </tbody>
         </table>
+
+        <!-- Delete All Button -->
+        <div class="text-right">
+            <form method="POST" action="/cart/deleteAll">
+                <input type="submit" class="btn btn-danger btn-lg" value="Delete All">
+            </form>
+        </div>
     <% } %>
 </div>
-
 
 <%- include('parts/footer') %>
