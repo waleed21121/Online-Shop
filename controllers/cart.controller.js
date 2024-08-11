@@ -45,3 +45,7 @@ exports.updateAmount = async (req, res, next) => {
         res.redirect('/cart');
     }
 }
+
+exports.deleteProductFromCart = async (req, res, next) => {
+    await cartModel.deleteItem(req.body.cartId);
+}
