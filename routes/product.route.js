@@ -1,9 +1,10 @@
 const router = require('express').Router();
 
 const prouctController = require('../controllers/product.controller');
+const authGuards = require('../guards/auth.guard');
 
-router.get("/", prouctController.getFirstproduct);
+router.get("/", authGuards.isAuth, prouctController.getFirstproduct);
 
-router.get("/:id", prouctController.getProduct);
+router.get("/:id", authGuards.isAuth, prouctController.getProduct);
 
 module.exports = router;
