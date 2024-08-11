@@ -10,6 +10,6 @@ router.get('/', authGard.isAuth, cartController.getCart);
 
 router.post('/', authGard.isAuth, cartValidator.checkAmount, cartController.postCart);
 
-router.get('/save', authGard.isAuth, cartValidator.checkAmount, cartController.updateAmount);
+router.post('/save', authGard.isAuth, cartValidator.checkAmount, cartController.updateAmount);
 
 module.exports = router;

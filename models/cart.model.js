@@ -39,9 +39,9 @@ exports.getItemByUserId = async (id) => {
 exports.editItem = async (id, newData) => {
     await mongoose.connect(DB_URL);
     try {
-        const items = CartItem.updateOne({ _id: id }, newData);
+        console.log(111);
+        await CartItem.updateOne({ _id: id }, { $set: newData });
         mongoose.disconnect();
-        return items;
     } catch (err) {
         mongoose.disconnect();
         return Promise.reject(err);

@@ -31,7 +31,7 @@ exports.getCart = async (req, res, next) => {
 exports.updateAmount = async (req, res, next) => {
     const validationErrors = validationResult(req);
     if(validationErrors.isEmpty()) {
-        await cartModel.editItem({
+        await cartModel.editItem(req.body.cartId, {
             amount: req.body.amount,
             timestamp: Date.now()
         });
