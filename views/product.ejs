@@ -8,6 +8,11 @@
         </div>
         
     <% } else { %>
+        <% if(validationErrors) { %>
+            <p class="alert alert-danger">
+                <%= validationErrors.msg%>
+            </p>
+        <% } %>
         <div class="row">
             <div class="col col-12 col-md-6">
                 <div class="card" style="width: 100%;">
