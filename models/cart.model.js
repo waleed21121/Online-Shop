@@ -23,3 +23,15 @@ exports.addNewItem = async (data) => {
         return Promise.reject(err);
     }
 }
+
+exports.getItemById = async (id) => {
+    await mongoose.connect(DB_URL);
+    try {
+        const userItems = await CartItem.find({userId: id});
+        mongoose.disconnect();
+        return userItems;
+    } catch (err) {
+        mongoose.disconnect();
+        return Promise.reject(err);
+    }
+}
