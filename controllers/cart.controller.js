@@ -22,3 +22,8 @@ exports.postCart = async (req, res, next) => {
         res.redirect(req.body.redirectTo);
     }
 }
+
+exports.getCart = async (req, res, next) => {
+    const userItems = await cartModel.getItemById(req.session.userId);
+    res.render('cart', {items: userItems});
+}
