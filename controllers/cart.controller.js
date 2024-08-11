@@ -25,7 +25,7 @@ exports.postCart = async (req, res, next) => {
 
 exports.getCart = async (req, res, next) => {
     const userItems = await cartModel.getItemByUserId(req.session.userId);
-    res.render('cart', {items: userItems, isUser: true});
+    res.render('cart', {items: userItems, isUser: true, validationErrors: req.flash('validationErrors')[0]});
 }
 
 exports.updateAmount = async (req, res, next) => {

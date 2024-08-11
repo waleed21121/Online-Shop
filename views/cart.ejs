@@ -5,6 +5,11 @@
     <% if(items.length === 0) { %>
         <p class="alert alert-danger text-center">There are no items in your cart</p>
     <% } else { %>
+        <% if(validationErrors) { %>
+            <p class="alert alert-danger">
+                <%= validationErrors.msg%>
+            </p>
+        <% } %>
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
