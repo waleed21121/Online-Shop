@@ -39,8 +39,18 @@ exports.getItemByUserId = async (id) => {
 exports.editItem = async (id, newData) => {
     await mongoose.connect(DB_URL);
     try {
-        console.log(111);
         await CartItem.updateOne({ _id: id }, { $set: newData });
+        mongoose.disconnect();
+    } catch (err) {
+        mongoose.disconnect();
+        return Promise.reject(err);
+    }
+};
+
+exports.deleteItem = async (id) => {
+    await mongoose.connect(DB_URL);
+    try {
+        await await CartItem.deleteOne({ _id: itemId });
         mongoose.disconnect();
     } catch (err) {
         mongoose.disconnect();
