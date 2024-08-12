@@ -1,0 +1,50 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+
+<div class="container mt-4">
+
+    <% if(items.length === 0) { %>
+        <p class="alert alert-danger text-center">There are no items</p>
+    <% } else { %>
+    
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        <th>Total</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let i = 0; i < items.length; i++) { %>
+                        <tr>
+                            <td> <%= i+1 %> </td>
+                            <td> <a href="/product/<%= items[i].productId %>"><%= items[i].name %></a> </td>
+                            <td> <%= items[i].price.toFixed(2) %> $ </td>
+                            <td> <%= items[i].amount %> </td>
+                            <td> <%= (items[i].price * items[i].amount).toFixed(2) %> $ </td>
+                            <td> <%= items[i].address %> </td>
+                            <td> <%= items[i].status %> </td>
+                            <td>
+                                <form method="POST" class="d-inline">
+                                    <input type="hidden" name="orderId" value="<%= items[i]._id %>">
+                                    <input type="submit" class="btn btn-danger btn-sm" value="Cancel" formaction="/orders/cancel">
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+    <% } %>
+
+</div>
+
+<%- include('parts/footer') %>
