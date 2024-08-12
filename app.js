@@ -12,6 +12,7 @@ const homeRouter = require('./routes/home.route');
 const productRouter = require('./routes/product.route');
 const authRouter = require('./routes/auth.route');
 const cartRouter = require('./routes/cart.route');
+const ordersRouter = require('./routes/orders.route');
 
 const app = express();
 
@@ -41,8 +42,11 @@ app.use('/product', productRouter);
 // Cart page details
 app.use('/cart', cartRouter);
 
-// Cign up page details
-app.use('/', authRouter);
+// Orders page details
+app.use('/cart', cartRouter);
+
+// Sign up page details
+app.use('/orders', authRouter);
 
 const PORT = process.env.PORT;
 app.listen(PORT, (err) => {

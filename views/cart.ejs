@@ -35,7 +35,7 @@
                             <td>
                                 <input type="hidden" name="cartId" value="<%= items[i]._id %>">
                                 <input type="submit" class="btn btn-success btn-sm" value="Save" formaction="/cart/save">
-                                <a class="btn btn-primary btn-sm" href="/verify-order?order=<%= items[i]._id %>"> Order </a>
+                                <a class="btn btn-primary btn-sm" href="/orders/verify-order?order=<%= items[i]._id %>"> Order </a>
                                 <input type="submit" class="btn btn-danger btn-sm" value="Delete" formaction="/cart/delete">
                             </td>
                         </form>
