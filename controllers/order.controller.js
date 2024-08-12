@@ -1,4 +1,14 @@
 const orderModel = require('../models/oreder.model');
+const cartModel = require('../models/cart.model');
+
+exports.getOrderVerify = async (req, res, next) => {
+    const item = await cartModel.getItemById(req.query.order);
+    res.render("verify-order", {
+        cart: item,
+        isUser: true,
+        pageTitle: "Verify Order",
+    });
+};
 
 exports.postOrder = async (req, res, next) => {
     await orderModel.addNewOrder({
