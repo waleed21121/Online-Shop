@@ -16,7 +16,6 @@ const orderSchema = mongoose.Schema({
         type: String,
         default: "pending"
     },
-    timestamp: Number
 });
 
 const Order = mongoose.model('oreder', orderSchema);
