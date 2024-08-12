@@ -40,3 +40,8 @@ exports.getOrder = async (req, res, next) => {
     const orders = await orderModel.getOrdersByUser(req.session.userId)
     res.render("orders", {pageTitle: "Orders", isUser: true, items: orders});
 };
+
+exports.postCancel = async (req, res, next) => {
+    await orderModel.cancelOrder(req.session.userId)
+    res.redirect('/orders');
+};
