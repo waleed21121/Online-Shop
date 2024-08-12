@@ -5,5 +5,6 @@ const authGard = require('../guards/auth.guard');
 
 router.use(bodyParser.urlencoded({extended: true}));
 
+router.get('/verify-order', authGard.isAuth, orderController.getOrderVerify);
 
-router.post('/', authGard.isAuth, orderController.postOrder);
+router.post('/orders', authGard.isAuth, orderController.postOrder);
