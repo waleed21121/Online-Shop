@@ -33,9 +33,9 @@ exports.addNewOrder = async (orderData, cartId) => {
 };
 
 exports.getOrdersByUser = async (id) => {
-    mongoose.connect(DB_URL);
+    await mongoose.connect(DB_URL);
     try {
-        const orders = Order.find({userId: id});
+        const orders = await Order.find({userId: id});
         await mongoose.disconnect();
         return orders;
     } catch (err) {
