@@ -8,8 +8,10 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 router.get('/verify-order', authGuard.isAuth, orderController.getOrderVerify);
 
-router.get('/', addressValidation.addressValidator, authGuard.isAuth, orderController.getOrder);
+router.get('/', authGuard.isAuth, orderController.getOrder);
 
-router.post('/', authGuard.isAuth, orderController.postOrder);
+router.post('/', addressValidation.addressValidator, authGuard.isAuth, orderController.postOrder);
+
+router.post('/cancel', authGuard.isAuth, orderController.postCancel);
 
 module.exports = router;
