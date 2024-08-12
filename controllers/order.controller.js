@@ -8,6 +8,7 @@ exports.getOrderVerify = async (req, res, next) => {
         cart: item,
         isUser: true,
         pageTitle: "Verify Order",
+        validationError: req.flash('validationErrors')[0]
     });
 };
 

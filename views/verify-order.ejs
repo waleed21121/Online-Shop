@@ -3,6 +3,11 @@
 
 <div class="container text-center">
     <h3>Verify Order</h3>
+    <% if(validationError) { %>
+        <p class="alert alert-danger">
+        <%= validationError.msg %>
+        </p>
+    <% } %>
     <form action="/orders" method="POST">
         <input type="hidden" name="cartId" value="<%= cart._id%>">
         <input type="hidden" name="name" value="<%= cart.name%>">
