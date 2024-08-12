@@ -8,3 +8,5 @@ router.use(bodyParser.urlencoded({extended: true}));
 router.get('/verify-order', authGard.isAuth, orderController.getOrderVerify);
 
 router.post('/', authGard.isAuth, orderController.postOrder);
+
+module.exports = router;

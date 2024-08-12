@@ -43,10 +43,10 @@ app.use('/product', productRouter);
 app.use('/cart', cartRouter);
 
 // Orders page details
-app.use('/cart', cartRouter);
+app.use('/orders', ordersRouter);
 
 // Sign up page details
-app.use('/orders', authRouter);
+app.use('/', authRouter);
 
 const PORT = process.env.PORT;
 app.listen(PORT, (err) => {
