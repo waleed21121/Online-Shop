@@ -31,3 +31,14 @@ exports.addNewOrder = async (orderData, cartId) => {
         return Promise.reject(err);
     }
 };
+
+exports.getOrdersByUser = async (id) => {
+    mongoose.connect(DB_URL);
+    try {
+        const orders = Order.find({userId: id});
+        await mongoose.disconnect();
+        return orders;
+    } catch (err) {
+        return Promise.reject(err);
+    }
+};
