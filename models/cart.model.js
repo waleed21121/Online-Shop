@@ -78,7 +78,7 @@ exports.deleteAllCartItems = async (id) => {
 exports.getItemById = async (id) => {
     await mongoose.connect(DB_URL);
     try {
-        const item = await CartItem.find({ _id: id});
+        const item = await CartItem.findOne({ _id: id});
         mongoose.disconnect();
         return item;
     } catch (err) {
