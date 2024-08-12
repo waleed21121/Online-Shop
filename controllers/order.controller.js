@@ -23,3 +23,8 @@ exports.postOrder = async (req, res, next) => {
     }, req.body.cartId);
     res.redirect("/orders");
 };
+
+exports.getOrder = async (req, res, next) => {
+    const orders = await orderModel.getOrdersByUser(req.session.userId)
+    res.render("orders", {pageTitle: "Orders", isUser: true, items: orders});
+};
