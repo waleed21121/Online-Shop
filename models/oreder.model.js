@@ -21,3 +21,14 @@ const orderSchema = mongoose.Schema({
 
 const Order = mongoose.model('oreder', orderSchema);
 
+exports.addNewOrder = async (orderData, cartId) => {
+    await mongoose.connect(DB_URL);
+    try {
+        await cartModel.deleteItem(cartId);
+        const order = new Order(orderData);
+        await order.save();
+        await mongoose.disconnect();
+    } catch (err) {
+        return Promise.reject(err);
+    }
+};
