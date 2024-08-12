@@ -42,6 +42,6 @@ exports.getOrder = async (req, res, next) => {
 };
 
 exports.postCancel = async (req, res, next) => {
-    await orderModel.cancelOrder(orderId);
+    await orderModel.cancelOrder(req.body.orderId);
     res.redirect('/orders');
 };
