@@ -74,3 +74,15 @@ exports.deleteAllCartItems = async (id) => {
         return Promise.reject(err);
     }
 };
+
+exports.getItemById = async (id) => {
+    await mongoose.connect(DB_URL);
+    try {
+        const item = await CartItem.find({ _id: id});
+        mongoose.disconnect();
+        return item;
+    } catch (err) {
+        mongoose.disconnect();
+        return Promise.reject(err);
+    }
+};
