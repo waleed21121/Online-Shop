@@ -14,9 +14,13 @@ exports.getAdd = (req, res, next) => {
 exports.postAdd = async (req, res, next) => {
     const validationErrors = validationResult(req);
     if(validationErrors.isEmpty()) {
-        req.body.image = req.file.filename;
-        await productsModel.addNewProduct(req.body)
-        res.redirect("/admin/add");
+        try {
+            req.body.image = req.file.filename;
+            await productsModel.addNewProduct(req.body)
+            res.redirect("/admin/add");
+        } catch (err) {
+            res.redirect('/error');
+        }
     } else {
         const errorsArray = validationErrors.array().map(err => ({
             param: err.path,
@@ -28,20 +32,28 @@ exports.postAdd = async (req, res, next) => {
 };
 
 exports.getOrders = async (req, res, next) => {
-    const orders = await ordersModel.getAllOrders();
-    for(let i = 0; i < orders.length; i++) {
-        const userEmail = await authModel.findUserById(orders[i].userId);
-        orders[i].email = userEmail;
+    try { 
+        const orders = await ordersModel.getAllOrders();
+        for(let i = 0; i < orders.length; i++) {
+            const userEmail = await authModel.findUserById(orders[i].userId);
+            orders[i].email = userEmail;
+        }
+        res.render("manage-orders", {
+            pageTitle: "Manage Orders",
+            isUser: true,
+            isAdmin: true,
+            items: orders
+        });
+    } catch (err) {
+        res.redirect('/error');
     }
-    res.render("manage-orders", {
-        pageTitle: "Manage Orders",
-        isUser: true,
-        isAdmin: true,
-        items: orders
-    });
 };
 
 exports.postOrders = async (req, res, next) => {
-    await ordersModel.editOrder(req.body.orderId, req.body.status)
-    res.redirect("/admin/orders");
+    try {
+        await ordersModel.editOrder(req.body.orderId, req.body.status)
+        res.redirect("/admin/orders");
+    } catch (err) {
+        res.redirect('/error');
+    }
 };
