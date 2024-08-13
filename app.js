@@ -59,6 +59,16 @@ app.use('/error', (req, res, next) => {
     }); 
 });
 
+// Not admin error
+app.get("/not-admin", (req, res, next) => {
+    res.status(403);
+    res.render("not-admin", {
+        isUser: req.session.userId,
+        isAdmin: false,
+        pageTitle: "Not Allowed"
+    });
+});
+
 // Sign up page details
 app.use('/', authRouter);
 
