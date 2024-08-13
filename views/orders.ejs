@@ -30,12 +30,22 @@
                             <td> <%= items[i].amount %> </td>
                             <td> <%= (items[i].price * items[i].amount).toFixed(2) %> $ </td>
                             <td> <%= items[i].address %> </td>
-                            <td> <%= items[i].status %> </td>
                             <td>
-                                <form method="POST" class="d-inline">
-                                    <input type="hidden" name="orderId" value="<%= items[i]._id %>">
-                                    <input type="submit" class="btn btn-danger btn-sm" value="Cancel" formaction="/orders/cancel">
-                                </form>
+                                <% if (items[i].status === 'pending') { %>
+                                    <span class="badge badge-warning">Pending</span>
+                                <% } else if (items[i].status === 'sent') { %>
+                                    <span class="badge badge-info">Sent</span>
+                                <% } else if (items[i].status === 'complete') { %>
+                                    <span class="badge badge-success">Complete</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <% if(items[i].status === 'pending') { %>
+                                    <form method="POST" class="d-inline">
+                                        <input type="hidden" name="orderId" value="<%= items[i]._id %>">
+                                        <input type="submit" class="btn btn-danger btn-sm" value="Cancel" formaction="/orders/cancel">
+                                    </form>
+                                <% } %>
                             </td>
                         </tr>
                     <% } %>
