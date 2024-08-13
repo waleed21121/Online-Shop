@@ -44,7 +44,7 @@ exports.getOrders = async (req, res, next) => {
             isUser: true,
             isAdmin: true,
             items: orders,
-            pageTitle: 'Orders'
+            pageTitle: 'Manage Orders'
         });
     } catch (err) {
         res.redirect('/error');
