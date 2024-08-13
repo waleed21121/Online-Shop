@@ -8,6 +8,10 @@ const userSchema = new mongoose.Schema({
     username: String,
     email: String,
     password: String,
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const User = mongoose.model('user', userSchema);
@@ -68,6 +72,6 @@ exports.login = async (email, password) => {
     if(!userExist) {
         return Promise.reject('The password is incorrect');
     } else  {
-        return user._id;
+        return {userId: user._id, isAdmin: user.isAdmin};
     }    
 }
