@@ -63,3 +63,8 @@ exports.getAllOrders = async () => {
         return Promise.reject(err);
     }
 };
+
+exports.editOrder = async (id, status) => {
+    await mongoose.connect(DB_URL);
+    await Order.updateOne({ _id: id }, { status: status });
+};
