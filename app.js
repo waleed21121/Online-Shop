@@ -13,6 +13,7 @@ const productRouter = require('./routes/product.route');
 const authRouter = require('./routes/auth.route');
 const cartRouter = require('./routes/cart.route');
 const ordersRouter = require('./routes/orders.route');
+const adminRouter = require('./routes/admin.route');
 
 const app = express();
 
@@ -44,6 +45,9 @@ app.use('/cart', cartRouter);
 
 // Orders page details
 app.use('/orders', ordersRouter);
+
+// Add product page details
+app.use('/admin', adminRouter);
 
 // Sign up page details
 app.use('/', authRouter);
