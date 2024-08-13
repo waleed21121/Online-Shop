@@ -24,7 +24,7 @@
                 <% for (let i = 0; i < items.length; i++) { %>
                     <tr>
                         <td><%= i+1 %></td>
-                        <td><%= items[i].userId %></td>
+                        <td><%= items[i].email %></td>
                         <td><a href="/product/<%= items[i].productId %>"><%= items[i].name %></a></td>
                         <td><%= items[i].price %> $</td>
                         <td><%= items[i].amount %></td>

@@ -1,5 +1,6 @@
 const productsModel = require('../models/products.model');
 const ordersModel = require('../models/oreder.model');
+const authModel = require('../models/auth.model');
 const validationResult = require('express-validator').validationResult;
 
 exports.getAdd = (req, res, next) => {
@@ -28,6 +29,10 @@ exports.postAdd = async (req, res, next) => {
 
 exports.getOrders = async (req, res, next) => {
     const orders = await ordersModel.getAllOrders();
+    for(let i = 0; i < orders.lenght; i++) {
+        const userEmail = await authModel.findUserById(orders[i].userId);
+        orders[i].email = userEmail;
+    }
     res.render("manage-orders", {
         pageTitle: "Manage Orders",
         isUser: true,
