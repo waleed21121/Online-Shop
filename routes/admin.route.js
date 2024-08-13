@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const adminController = require('../controllers/admin.controller');
+const addProductValidation = require('../validators/add-product.validator');
 const multer = require('multer');
 
 router.get('/add', adminGuard.isUserAdmin, adminController.getAdd);
@@ -13,6 +14,6 @@ router.post('/add', adminGuard.isUserAdmin, multer({
             cb(null, Date.now() + '-' + file.originalname);
         }
     })
-}).single('image'), adminController.postAdd);
+}).single('image'), addProductValidation.addProductValidator, adminController.postAdd);
 
 module.exports = router
