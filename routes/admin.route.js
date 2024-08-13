@@ -23,4 +23,6 @@ router.post('/add', adminGuard.isUserAdmin, multer({
 
 router.get('/orders', adminGuard.isUserAdmin, adminController.getOrders);
 
+router.post('/orders', adminGuard.isUserAdmin, adminController.postOrders);
+
 module.exports = router
