@@ -1,4 +1,5 @@
 const productsModel = require('../models/products.model');
+const ordersModel = require('../models/oreder.model');
 const validationResult = require('express-validator').validationResult;
 
 exports.getAdd = (req, res, next) => {
@@ -23,4 +24,14 @@ exports.postAdd = async (req, res, next) => {
         req.flash("validationErrors", errorsArray);
         res.redirect("/admin/add");
     }
-}
+};
+
+exports.getOrders = async (req, res, next) => {
+    const orders = await ordersModel.getAllOrders();
+    res.render("manage-orders", {
+        pageTitle: "Manage Orders",
+        isUser: true,
+        isAdmin: true,
+        items: orders
+    });
+};
