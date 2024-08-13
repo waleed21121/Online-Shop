@@ -10,7 +10,8 @@ exports.getOrderVerify = async (req, res, next) => {
             isUser: true,
             isAdmin: req.session.isAdmin,
             pageTitle: "Verify Order",
-            validationError: req.flash('validationErrors')[0]
+            validationError: req.flash('validationErrors')[0],
+            pageTitle: 'Verify Order'
         });
     } catch (err) {
         res.redirect('/error');
@@ -50,7 +51,8 @@ exports.getOrder = async (req, res, next) => {
         const orders = await orderModel.getOrdersByUser(req.session.userId)
         res.render("orders",{pageTitle: "Orders",
             isUser: true, items: orders,
-            isAdmin: req.session.isAdmin
+            isAdmin: req.session.isAdmin,
+            pageTitle: 'Orders'
         });
     } catch (err) {
         res.redirect('/error');

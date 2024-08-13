@@ -33,7 +33,8 @@ exports.getCart = async (req, res, next) => {
         res.render('cart', {items: userItems,
             isUser: true,
             isAdmin: req.session.isAdmin,
-            validationErrors: req.flash('validationErrors')[0]
+            validationErrors: req.flash('validationErrors')[0],
+            pageTitle: 'Cart'
         });
     } catch (err) {
         res.redirect('/error');

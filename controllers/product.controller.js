@@ -7,7 +7,8 @@ exports.getProduct = async (req, res, next) => {
         res.render('product', {product: product,
             isUser: req.session.userId,
             isAdmin: req.session.isAdmin,
-            validationErrors: req.flash('validationErrors')[0]
+            validationErrors: req.flash('validationErrors')[0],
+            pageTitle: 'Product'
         });
     } catch (err) {
         res.redirect('/error');
@@ -19,7 +20,8 @@ exports.getFirstproduct = async (req, res, next) => {
         let product = await productModel.getFirstProduct();
         res.render('product', {product : product,
             isUser: req.session.userId,
-            isAdmin: req.session.isAdmin
+            isAdmin: req.session.isAdmin,
+            pageTitle: 'Proudct'
         });
     } catch (err) {
         res.redirect('/error');

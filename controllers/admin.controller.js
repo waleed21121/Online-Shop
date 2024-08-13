@@ -7,7 +7,8 @@ exports.getAdd = (req, res, next) => {
     res.render('add-product', {
         validationErrors: req.flash('validationErrors'),
         isAdmin: true,
-        isUser: true
+        isUser: true,
+        pageTitle: 'Add Product'
     });
 };
 
@@ -42,7 +43,8 @@ exports.getOrders = async (req, res, next) => {
             pageTitle: "Manage Orders",
             isUser: true,
             isAdmin: true,
-            items: orders
+            items: orders,
+            pageTitle: 'Orders'
         });
     } catch (err) {
         res.redirect('/error');

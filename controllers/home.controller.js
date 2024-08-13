@@ -15,6 +15,7 @@ exports.getHome = async(req, res, next) => {
     res.render('index', {products: products,
         isUser: req.session.userId,
         isAdmin: req.session.isAdmin,
-        validationErrors: req.flash('validationErrors')[0]
+        validationErrors: req.flash('validationErrors')[0],
+        pageTitle: 'Home'
     });
 }
