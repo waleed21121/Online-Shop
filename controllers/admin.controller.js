@@ -29,7 +29,7 @@ exports.postAdd = async (req, res, next) => {
 
 exports.getOrders = async (req, res, next) => {
     const orders = await ordersModel.getAllOrders();
-    for(let i = 0; i < orders.lenght; i++) {
+    for(let i = 0; i < orders.length; i++) {
         const userEmail = await authModel.findUserById(orders[i].userId);
         orders[i].email = userEmail;
     }

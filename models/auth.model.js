@@ -75,3 +75,17 @@ exports.login = async (email, password) => {
         return {userId: user._id, isAdmin: user.isAdmin};
     }    
 }
+
+exports.findUserById = async (id) => {
+
+    // Connect to DB
+    await mongoose.connect(DB_URL);
+
+    // Check if email exists
+    let user = await User.findOne({_id : id});
+
+    //Disconnect fron DB
+    await mongoose.disconnect();
+
+    return user.email;
+}
