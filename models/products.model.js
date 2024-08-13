@@ -60,3 +60,16 @@ exports.getFirstProduct = async() => {
 
     return product;
 }
+
+exports.addNewProduct = async(data) => {
+
+    await mongoose.connect(DB_URL);
+
+    const product = new Product(data);
+
+    await product.save();
+
+    await mongoose.disconnect();
+
+    return product;
+}
