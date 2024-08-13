@@ -52,3 +52,14 @@ exports.cancelOrder = async (id) => {
         return Promise.reject(err);
     }
 };
+
+exports.getAllOrders = async () => {
+    await mongoose.connect(DB_URL);
+    try {
+        const orders = await Order.find({});
+        await mongoose.disconnect();
+        return orders;
+    } catch (err) {
+        return Promise.reject(err);
+    }
+};
