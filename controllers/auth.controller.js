@@ -39,8 +39,9 @@ exports.postLogin = async (req, res, next) => {
     const validationErrors = validationResult(req);
     if(validationErrors.isEmpty()) {
         try {
-            let id = await authModel.login(req.body.email, req.body.password);
-            req.session.userId = id;
+            const user = await authModel.login(req.body.email, req.body.password);
+            req.session.userId = user.userId;
+            req.session.isAdmin = user.isAdmin;
             res.redirect('/');
         } catch (err) {
             req.flash('authError', err); // flash('key', val) => array
