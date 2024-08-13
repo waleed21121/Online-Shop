@@ -7,4 +7,6 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 router.get('/add', adminGuard.isUserAdmin, adminController.getAdd);
 
+router.post('/add', adminGuard.isUserAdmin, adminController.postAdd);
+
 module.exports = router
