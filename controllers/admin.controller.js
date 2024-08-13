@@ -40,3 +40,8 @@ exports.getOrders = async (req, res, next) => {
         items: orders
     });
 };
+
+exports.postOrders = async (req, res, next) => {
+    await ordersModel.editOrder(req.body.orderId, req.body.status)
+    res.redirect("/admin/orders");
+};
