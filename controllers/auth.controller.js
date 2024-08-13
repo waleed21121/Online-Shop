@@ -4,7 +4,9 @@ const validationResult = require ('express-validator').validationResult;
 exports.getSignup = (req, res, next) => {
     res.render('signup', {authError: req.flash("authError")[0],
         validationErrors: req.flash("validationErrors"),
-        isUser: req.session.userId});
+        isUser: false,
+        isAdmin: false
+    });
 }
 
 exports.postSignup = async (req, res, next) => {
@@ -31,7 +33,8 @@ exports.postSignup = async (req, res, next) => {
 exports.getlLogin = (req, res, next) => {
     res.render('login', {authError: req.flash('authError')[0],
         validationErrors: req.flash('validationErrors'),
-        isUser: req.session.userId
+        isUser: false,
+        isAdmin: false
     });
 }
 
