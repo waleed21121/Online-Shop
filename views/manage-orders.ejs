@@ -1,0 +1,66 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+
+<div class="container mt-4">
+    <% if(items.length === 0) { %>
+        <p class="alert alert-danger text-center">There are no items</p>
+    <% } else { %>
+    
+        <table class="table table-bordered table-hover table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>No</th>
+                    <th>Email</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th>Total</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let i = 0; i < items.length; i++) { %>
+                    <tr>
+                        <td><%= i+1 %></td>
+                        <td><%= items[i].userId %></td>
+                        <td><a href="/product/<%= items[i].productId %>"><%= items[i].name %></a></td>
+                        <td><%= items[i].price %> $</td>
+                        <td><%= items[i].amount %></td>
+                        <td><%= items[i].price * items[i].amount %> $</td>
+                        <td><%= items[i].address %></td>
+                        <td>
+                            <% if (items[i].status === 'pending') { %>
+                                <span class="badge badge-warning">Pending</span>
+                            <% } else if (items[i].status === 'sent') { %>
+                                <span class="badge badge-info">Sent</span>
+                            <% } else if (items[i].status === 'complete') { %>
+                                <span class="badge badge-success">Complete</span>
+                            <% } %>
+                        </td>
+                        <td>
+                            <% if (items[i].status === 'pending') { %>
+                                <form style="display: inline-block;" method="POST" action="/admin/orders">
+                                    <input type="hidden" name="orderId" value="<%= items[i]._id %>">
+                                    <input type="hidden" name="status" value="sent">
+                                    <input type="submit" class="btn btn-primary btn-sm" value="Send">
+                                </form>
+                            <% } else if (items[i].status === 'sent') { %>
+                                <form style="display: inline-block;" method="POST" action="/admin/orders">
+                                    <input type="hidden" name="orderId" value="<%= items[i]._id %>">
+                                    <input type="hidden" name="status" value="complete">
+                                    <input type="submit" class="btn btn-success btn-sm" value="Complete">
+                                </form>
+                            <% } %>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+
+    <% } %>
+
+</div>
+
+<%- include('parts/footer') %>
