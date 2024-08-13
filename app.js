@@ -49,6 +49,16 @@ app.use('/orders', ordersRouter);
 // Add product page details
 app.use('/admin', adminRouter);
 
+// Error page
+app.use('/error', (req, res, next) => {
+    res.status(500);
+    res.render("error.ejs", {
+        isUser: req.session.userId,
+        isAdmin: req.session.isAdmin,
+        pageTitle: "Error"
+    }); 
+});
+
 // Sign up page details
 app.use('/', authRouter);
 
