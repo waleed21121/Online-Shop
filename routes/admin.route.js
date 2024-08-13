@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const adminController = require('../controllers/admin.controller');
+const adminGuard = require('../guards/admin.guard');
 const addProductValidation = require('../validators/add-product.validator');
 const multer = require('multer');
 

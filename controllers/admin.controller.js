@@ -9,7 +9,7 @@ exports.getAdd = (req, res, next) => {
     });
 };
 
-exports.getPost = async (req, res, next) => {
+exports.postAdd = async (req, res, next) => {
     const validationErrors = validationResult(req);
     if(validationErrors.isEmpty()) {
         req.body.image = req.file.filename;
