@@ -72,6 +72,16 @@ app.get("/not-admin", (req, res, next) => {
 // Sign up page details
 app.use('/', authRouter);
 
+// Error page
+app.use((req, res, next) => {
+    res.status(500);
+    res.render("error.ejs", {
+        isUser: req.session.userId,
+        isAdmin: req.session.isAdmin,
+        pageTitle: "Error"
+    }); 
+});
+
 const PORT = process.env.PORT;
 app.listen(PORT, (err) => {
     console.log(`server listening on port ${PORT}`);
